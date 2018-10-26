@@ -8,6 +8,8 @@
     <description>Harvest MSBuild task for Wix Toolkit projects</description>
     <tags>msbuild wix harvest</tags>
     <copyright>Copyright © Philip Patrick 2019</copyright>
+    <projectUrl>https://github.com/stpatrick2016/wix-msbuid-tasks</projectUrl>
+    <licenseUrl>https://github.com/stpatrick2016/wix-msbuid-tasks/blob/master/LICENSE</licenseUrl>
     <developmentDependency>true</developmentDependency>
     <dependencies />
     <references />
