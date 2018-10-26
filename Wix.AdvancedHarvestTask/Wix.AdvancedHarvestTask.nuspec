@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>Wix.AdvancedHarvestTask</id>
+    <version>0.9.1</version>
+    <title>Wix Harvest Build Task</title>
+    <authors>Philip Patrick</authors>
+    <description>Harvest MSBuild task for Wix Toolkit projects</description>
+    <tags>msbuild wix harvest</tags>
+    <copyright>Copyright © Philip Patrick 2019</copyright>
+    <developmentDependency>true</developmentDependency>
+    <dependencies />
+    <references />
+  </metadata>
+  <files>
+    <file src="Wix.AdvancedHarvestTask.props" target="build" />
+    <file src="bin\$configuration$\Wix.AdvancedHarvestTask.dll" target="build" />
+  </files>
+</package>
