@@ -43,6 +43,8 @@ namespace Wix.AdvancedHarvestTask.Tests
             fsmock.Setup(f => f.Save(It.IsAny<XmlDocument>(), It.IsAny<string>())).Callback<XmlDocument, string>((d, s) => doc = d);
 
             task.ExcludeMask = "*.excluded";
+            task.SourceFolder = "x:\non-existent";
+            task.OutputFile = "file.wxs";
 
             //act
             task.Execute();
