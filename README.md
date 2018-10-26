@@ -1,4 +1,5 @@
 # MSBuild tasks for Wix Toolset
+[![Build status](https://stpatrick.visualstudio.com/Tools/_apis/build/status/Wix.AdvancedHarvestTask%20Build)](https://stpatrick.visualstudio.com/Tools/_build/latest?definitionId=-1)
 
 ## HarvestDirectory
 This task is similar to original HeatDirectory, but allows greater control of which files should be included or excluded. For example, the code below, adds all files in ..\MyComponent\bin\Release (or Debug or whatever your configuration is) excluding PDB files:
