@@ -33,8 +33,6 @@ This task is similar to original HeatDirectory, but allows greater control of wh
   IncludeEmptyDirectories="true" />
 ```
 
-Once you add this task and compile it for the first time, a new file (named *MyComponentFiles.wxs* in the example above) will be created. Add this file to the project so it will be compiled.
-
 ### Parameters:
 * *SourceFolder* - path to the folder to search for files. Required.
 * *DirectoryRefId* - directory ID, must be declared elsewhere in the project. Required.
@@ -46,3 +44,27 @@ Once you add this task and compile it for the first time, a new file (named *MyC
 * *DiskId* - id of the disk harvested files should be added to. Optional, default is Wix default, [which is 1](http://wixtoolset.org/documentation/manual/v3/xsd/wix/component.html).
 * *DefaultFileVersion* - what should be the default file version when no version information found in files. See [DefaultVersion](DefaultVersion) in Wix Toolset documentation. Optional.
 * *IncludeEmptyDirectories* - should empty directories be added to generated file. Optional, default is *false*.
+
+## How to use
+1. Unload your Wix project and Edit it (both operations can be performed from context menu). 
+2. Somewhere after all Wix imports, add new target, call it anything you want, for example *HarvestAllInput*. Make sure it is configured to run before target named *BeforeBuild*.
+3. Add *HarvestDirectory* with relevant parameters
+4. Reload project and compile it.
+5. When compile it for the first time, a new file (named *MyComponentFiles.wxs* in the example above) will be created. Add this file to the project so it will be also compiled next time.
+
+Example of *.wixproj* file:
+```
+..................
+  <Import Project="$(WixTargetsPath)" Condition=" '$(WixTargetsPath)' != '' " />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\WiX\v3.x\Wix.targets" Condition=" '$(WixTargetsPath)' == '' AND Exists('$(MSBuildExtensionsPath32)\Microsoft\WiX\v3.x\Wix.targets') " />
+  <Target Name="EnsureWixToolsetInstalled" Condition=" '$(WixTargetsImported)' != 'true' ">
+    <Error Text="The WiX Toolset v3.11 (or newer) build tools must be installed to build this project. To download the WiX Toolset, see http://wixtoolset.org/releases/" />
+  </Target>
+  <!-- ADDED CODE BELOW -->
+  <Target Name="HarvestAllInput" BeforeTargets="BeforeBuild">
+    <HarvestDirectory SourceFolder="..\MyServiceProject\bin\$(Configuration)" DirectoryRefId="MyService" OutputFile="MyComponentFiles.wxs" ComponentGroupName="MyComponentFiles" ExcludeMask="*.pdb;MyService.exe" />
+  </Target> 
+  <!-- END OF ADDED CODE -->
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+..................
+```
